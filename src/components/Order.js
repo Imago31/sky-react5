@@ -1,16 +1,16 @@
+
 /* eslint-disable dot-notation */
 /* eslint-disable eqeqeq */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/no-unused-class-component-methods */
 /* eslint-disable react/no-unused-state */
 
 import React from 'react'
-// import OrderDetail from './OrderDetail'
+import {Link} from "react-router-dom";
 
 export default class Order extends React.Component {
   constructor(props) {
@@ -52,36 +52,12 @@ export default class Order extends React.Component {
         },
       ],
     }
-    this.handlePlus = (e) => {
+
+
+    this.handleBook = (e) => {
       console.log(e.target.id);
-      const getPrice = this.state.details.find((item) => item.id == e.target.id)
-      getPrice["quantity"] += 1
-      this.setState({quantity: this.state.quantity + 1, 
-                     amount: this.state.amount + getPrice.price
-      })
+      document.querySelector('.orderLink2').click();
     }
-
-    this.handleMinus = (e) => {
-      console.log(e.target.id);
-      const getPrice = this.state.details.find((item) => item.id == e.target.id)
-      console.log(getPrice.quantity);
-        if(getPrice.quantity != 0){
-        this.setState({quantity: this.state.quantity - 1, 
-                      amount: this.state.amount - getPrice.price
-        })
-        getPrice["quantity"] -= 1
-      }
-    }
-
-  }
-
-
-
-  IncrementQuantityWithPrice(index) {
-
-  }
-
-  DecrementQuantityWithPrice(index) {
 
   }
 
@@ -91,26 +67,25 @@ export default class Order extends React.Component {
     
       <div className="order">
       {this.state.details.map((item) =>
-          // <OrderDetail
-          //   productName={item.productName}
-          //   price={item.price}
-          //   quantity={item.quantity}
-          // />
           <div className="order-detail">
             <p className="shopItem-title">{item.productName}</p>
             <p className="productName">Price: {item.price} /-</p>
-            <p className="productName">Quantity: {item.quantity}</p>
-            <button id={item.id} onClick={this.handlePlus} className="addButton">+</button>
-            <button id={item.id} onClick={this.handleMinus} className="removeButton">-</button>
+            <p>
+            <Link
+               to='/BookDesc'
+               state = {{
+                product: item.productName,
+                price: item.price
+              }}
+               >Read more
+            </Link>
+            </p>
+            <hr />
+            <Link className='orderLink2' to="/UserOrder" state = {{product: item.productName}}>Aad to cart</Link>
           </div>
-      )};
+          
+      )}
         <div className="clear" />
-        <p className="total">
-          Total Quantity: <b> {this.state.quantity} </b>
-        </p>
-        <p className="total">
-          Total Price: <b> {this.state.amount}  /- </b>
-        </p>
       </div>
      
       

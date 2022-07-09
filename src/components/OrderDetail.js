@@ -1,19 +1,15 @@
 /* eslint-disable react/button-has-type */
-
-
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/self-closing-comp */
 
-
-
-export default function OrderDetail(props) {
+export default function OrderDetail(productName,price,quantity,id,handlePlus,handleMinus) {
   return (
-    <div className="order-detail">
-        <h4 className="product-name">{props.productName}</h4>
-        <p className="productName">Price: {props.price} /-</p>
-        <p className="productName">Quantity: {props.quantity}</p>
-        <button onClick={props.handlePlus} className="add-button">+</button>
-
-    </div>
+          <div className="order-detail">
+            <p className="shopItem-title">{productName}</p>
+            <p className="productName">Price: {price} /-</p>
+            <p className="productName">Quantity: {quantity}</p>
+            <button id={id} onClick={handlePlus} className="addButton">+</button>
+            <button id={id} onClick={handleMinus} className="removeButton">-</button>
+          </div>
   )
 }
